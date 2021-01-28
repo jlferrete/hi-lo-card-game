@@ -50,7 +50,28 @@
         }
 
         function drawCard() {
+            if (deck.length > 0) {
+                let card = "";
+                return card;
+            } else {
+                makeDeck();
+                return drawCard();
+            }
+        }
 
+
+        function makeDeck() {
+            deck = [];
+            for (let i = 0; i < suits.length; i++) {
+                for (let j = 0; j < ranks.length; j++) {
+                    let card = {};
+                    card.suit = suits[i];
+                    card.rank = ranks[j];
+                    card.value = (j + 1);
+                    deck.push(card);
+                }
+            }
+            console.log(deck);
         }
 
         function makeCard() {
