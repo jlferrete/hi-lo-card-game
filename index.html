@@ -36,18 +36,15 @@
         function playGame(e) {
             let temp = e.target.innerText;
             let myCard = drawCard();
-            let win;
             if (temp == "Start") {
-                console.log("you clicked start");
                 message.innerHTML = "Higher or Lower";
                 gameplay.innerHTML = "";
                 makeCard(myCard);
                 toggleButtons();
                 return;
             }
-            console.log(myCard);
+
             if (myCard.value == curCardValue) {
-                win = "draw";
                 message.innerHTML = "Draw";
             } else {
                 if ((temp == "Higher" && (myCard.value > curCardValue)) || (temp == "Lower" && (myCard.value < curCardValue))) {
