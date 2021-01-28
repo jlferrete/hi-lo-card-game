@@ -18,13 +18,11 @@
         const score = document.querySelector(".score");
         const button = document.querySelectorAll("button");
         const gameplay = document.querySelector(".gameplay");
-
         let curCardValue = 0;
         let scoreValue = 0;
         let deck = [];
         const ranks = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
         const suits = ["hearts", "diams", "clubs", "spades"];
-
         for (let i = 0; i < button.length; i++) {
             button[i].addEventListener("click", playGame);
         }
@@ -43,7 +41,7 @@
             if (temp == "Start") {
                 console.log("you clicked start");
                 message.innerHTML = "Higher or Lower";
-                gameplay.innerHTML = "";
+                gameplay.innerHTML = myCard.rank + myCard.suit;
                 makeCard();
                 toggleButtons();
             }
@@ -51,14 +49,15 @@
 
         function drawCard() {
             if (deck.length > 0) {
-                let card = "";
+                let randIndex = Math.floor(Math.random() * deck.length);
+                let card = deck.splice(randIndex, 1)[0];
+                console.log(card);
                 return card;
             } else {
                 makeDeck();
                 return drawCard();
             }
         }
-
 
         function makeDeck() {
             deck = [];
@@ -74,9 +73,7 @@
             console.log(deck);
         }
 
-        function makeCard() {
-
-        }
+        function makeCard() {}
     </script>
 </body>
 
