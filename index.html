@@ -34,24 +34,39 @@
         }
 
         function playGame(e) {
-            console.log(e.target);
             let temp = e.target.innerText;
             let myCard = drawCard();
-            console.log(temp);
+            let win;
             if (temp == "Start") {
                 console.log("you clicked start");
                 message.innerHTML = "Higher or Lower";
                 gameplay.innerHTML = "";
                 makeCard(myCard);
                 toggleButtons();
+                return;
             }
+            console.log(myCard);
+            if (myCard.value == curCardValue) {
+                win = "draw";
+                message.innerHTML = "Draw";
+            } else {
+                if ((temp == "Higher" && (myCard.value > curCardValue)) || (temp == "Lower" && (myCard.value < curCardValue))) {
+                    scoreValue++;
+                    score.innerHTML = scoreValue;
+                    message.innerHTML = "Correct, Next?";
+                } else {
+                    message.innerHTML = "Wrong Game Over";
+                    toggleButtons();
+                }
+            }
+            makeCard(myCard);
+
         }
 
         function drawCard() {
             if (deck.length > 0) {
                 let randIndex = Math.floor(Math.random() * deck.length);
                 let card = deck.splice(randIndex, 1)[0];
-                console.log(card);
                 return card;
             } else {
                 makeDeck();
@@ -70,11 +85,9 @@
                     deck.push(card);
                 }
             }
-            console.log(deck);
         }
 
         function makeCard(card) {
-            console.log(card);
             let html1 = card.rank + "<br>&" + card.suit + ";";
             let html2 = card.rank + "&" + card.suit + ";";
             let curCards = document.querySelectorAll(".card");
